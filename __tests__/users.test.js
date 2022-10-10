@@ -67,11 +67,11 @@ describe('user routes', () => {
     expect(res.status).toEqual(200);
   });
 
-  // it('/users should return 401 if user not admin', async () => {
-  //   const [agent] = await registerAndLogin();
-  //   const res = await agent.get('/api/v1/users/');
-  //   expect(res.status).toEqual(403);
-  // });
+  it('/users should return 401 if user not admin', async () => {
+    const [agent] = await registerAndLogin();
+    const res = await agent.get('/api/v1/users/');
+    expect(res.status).toEqual(403);
+  });
 
   // it('/users should return 200 if user is admin', async () => {
   //   const agent = request.agent(app);
