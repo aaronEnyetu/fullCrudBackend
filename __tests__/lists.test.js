@@ -38,12 +38,28 @@ describe('user routes', () => {
 
   it('#POST /api/v1/lists/ should create a new item entry', async () => {
     const [agent, user] = await registerAndLogin();
-    const list = { description: 'laundry' };
-    const res = await agent.post('/api/v1/lists').send(list);
+    const item = { description: 'laundry' };
+    const res = await agent.post('/api/v1/lists').send(item);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: expect.any(String),
-      description: list.description,
+      description: item.description,
+      user_id: user.id,
+      completed: false,
+    });
+  });
+
+  it('#GET /api/v1/lists shows a list of all items for the auth user', async () => {
+    const [agent, user] = await registerAndLogin();
+    const item = { description: 'laptop' };
+    const res = await agent.post('/api/v1/lists').send(item);
+    expect(res.status).toBe(200);
+
+    const resp = await agent.get('/api/v1/lists');
+    expect(resp.body.length).toBe(1);
+    expect(resp.body[0]).toEqual({
+      id: expect.any(String),
+      description: 'laptop',
       user_id: user.id,
       completed: false,
     });
