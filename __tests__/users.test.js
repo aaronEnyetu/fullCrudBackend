@@ -48,13 +48,13 @@ describe('user routes', () => {
     });
   });
 
-  // it('signs in an existing user', async () => {
-  //   await request(app).post('/api/v1/users').send(mockUser);
-  //   const res = await request(app)
-  //     .post('/api/v1/users/sessions')
-  //     .send({ email: 'test@example.com', password: '12345' });
-  //   expect(res.status).toEqual(200);
-  // });
+  it('signs in an existing user', async () => {
+    await request(app).post('/api/v1/users').send(mockUser);
+    const res = await request(app)
+      .post('/api/v1/users/sessions')
+      .send({ email: 'test@example.com', password: '12345' });
+    expect(res.status).toEqual(200);
+  });
 
   // it('/protected should return a 401 if not authenticated', async () => {
   //   const res = await request(app).get('/api/v1/users/protected');
