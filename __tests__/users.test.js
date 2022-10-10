@@ -61,11 +61,11 @@ describe('user routes', () => {
     expect(res.status).toEqual(401);
   });
 
-  // it('/protected should return the current user if authenticated', async () => {
-  //   const [agent] = await registerAndLogin();
-  //   const res = await agent.get('/api/v1/users/protected');
-  //   expect(res.status).toEqual(200);
-  // });
+  it('/protected should return the current user if authenticated', async () => {
+    const [agent] = await registerAndLogin();
+    const res = await agent.get('/api/v1/users/protected');
+    expect(res.status).toEqual(200);
+  });
 
   // it('/users should return 401 if user not admin', async () => {
   //   const [agent] = await registerAndLogin();
