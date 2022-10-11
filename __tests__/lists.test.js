@@ -65,13 +65,34 @@ describe('user routes', () => {
     });
   });
 
-  it('DELETE /lists/:id should delete an existing item', async () => {
-    const [agent] = await registerAndLogin({ email: 'test@example.com' });
-    const deleteItem = await agent.delete('/api/v1/delete/1');
-    expect(deleteItem.status).toEqual(200);
-    expect(deleteItem.body).toEqual({
-      id: expect.any(String),
-      description: 'item is not in database',
-    });
-  });
+  //   it('#PUT /api/v1/lists/:id allows an auth user to complete a purchase', async () => {
+  //     const [agent, user] = await registerAndLogin();
+  //     const item = { description: 'laptop' };
+  //     const res = await agent.post('/api/v1/lists').send(item);
+  //     expect(res.status).toBe(200);
+
+  //     const resp = await agent.put('/api/v1/lists/1').send({ completed: true });
+  //     expect(resp.status).toBe(200);
+  //     expect(resp.body).toEqual({
+  //       id: expect.any(String),
+  //       description: 'laptop',
+  //       user_id: user.id,
+  //       completed: true,
+  //     });
+  //   });
+
+  //   it('#DELETE /api/v1/lists/:id user can delete an item', async () => {
+  //     const item = { description: 'laptop' };
+  //     const agent = request.agent(app);
+  //     await agent.post('/api/v1/users').send(mockUser);
+
+  //     const response = await agent.post('/api/v1/lists').send(item);
+  //     expect(response.status).toBe(200);
+
+  //     const res = await agent.delete('/api/v1/lists/1');
+  //     expect(res.status).toBe(200);
+
+  //     const resp = await agent.get('/api/v1/lists/1');
+  //     expect(resp.status).toBe(404);
+  //   });
 });
