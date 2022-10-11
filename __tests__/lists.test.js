@@ -70,8 +70,10 @@ describe('user routes', () => {
     const item = { description: 'laptop' };
     const res = await agent.post('/api/v1/lists').send(item);
     expect(res.status).toBe(200);
-
-    const resp = await agent.put('/api/v1/lists/1').send({ completed: true });
+    const resp = await agent
+      .put(`/api/v1/lists/${res.body.id}`)
+      .send({ completed: true });
+    console.log(resp.body);
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({
       id: expect.any(String),
@@ -82,14 +84,13 @@ describe('user routes', () => {
   });
 
   it('#DELETE /api/v1/lists/:id user can delete an item', async () => {
+    const [agent] = await registerAndLogin();
     const item = { description: 'laptop' };
-    const agent = request.agent(app);
-    await agent.post('/api/v1/users').send(mockUser);
 
     const response = await agent.post('/api/v1/lists').send(item);
     expect(response.status).toBe(200);
 
-    const res = await agent.delete('/api/v1/lists/1');
+    const res = await agent.delete(`/api/v1/lists/${response.body.id}`);
     expect(res.status).toBe(200);
 
     const resp = await agent.get('/api/v1/lists/1');
