@@ -80,8 +80,6 @@ describe('user routes', () => {
     await agent.post('/api/v1/users').send({
       email: 'admin',
       password: '1234',
-      // firstName: 'admin',
-      // lastName: 'admin',
     });
     // sign in the user
     await agent
